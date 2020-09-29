@@ -8,7 +8,6 @@ const STYLES_GRAPH_CONTAINER = css`
 `;
 
 const STYLES_GRAPH = css`
-  height: 600px;
   margin: auto;
   background-image: linear-gradient(${Constants.system.pitchBlack}, ${Constants.system.slate});
 `;
@@ -320,11 +319,11 @@ export default class Chart extends React.Component {
               )
             })}
             </g> : 
-          (<g id="xLabel">
+          (<g id="labels">
             <text css={STYLES_CHART_TEXT} x="8%" y="95%">
                 {Object.keys(data[0])[1]} 
               </text>
-              <text css={STYLES_CHART_TEXT_Y} x="6%" y="82%">
+              <text css={STYLES_CHART_TEXT_Y} x="5%" y="82%">
                 {Object.keys(data[0])[3]}
               </text>
           </g>)

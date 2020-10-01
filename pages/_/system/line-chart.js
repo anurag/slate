@@ -7,6 +7,7 @@ import ViewSourceLink from "~/components/system/ViewSourceLink";
 import CodeBlock from "~/components/system/CodeBlock";
 
 import Chart from "~/components/stats/Chart";
+import CustomIntervalChart from "../../../components/stats/CustomIntervalChart";
 
 //Simulating real data pulled in
 
@@ -19,25 +20,26 @@ const randomDate = (start, end) => {
 }
 
 let data = [
-  { id: 1, date: randomDate(new Date(2018, 0, 1), new Date()), category: "1", value: getRandomInt(1000) },
-  { id: 2, date: randomDate(new Date(2018, 0, 1), new Date()), category: "1", value: getRandomInt(1000) },
-  { id: 4, date: randomDate(new Date(2018, 0, 1), new Date()), category: "1", value: getRandomInt(1000) },
-  { id: 3, date: randomDate(new Date(2018, 0, 1), new Date()), category: "1", value: getRandomInt(1000) },
-  { id: 5, date: randomDate(new Date(2018, 0, 1), new Date()), category: "1", value: getRandomInt(1000) },
-  { id: 6, date: randomDate(new Date(2018, 0, 1), new Date()), category: "1", value: getRandomInt(1000) },
-  { id: 7, date: randomDate(new Date(2018, 0, 1), new Date()), category: "2", value: getRandomInt(1000) },
-  { id: 8, date: randomDate(new Date(2018, 0, 1), new Date()), category: "2", value: getRandomInt(1000) },
-  { id: 9, date: randomDate(new Date(2018, 0, 1), new Date()), category: "2", value: getRandomInt(1000) },
-  { id: 10, date: randomDate(new Date(2018, 0, 1), new Date()), category: "2", value: getRandomInt(1000) },
-  { id: 11, date: randomDate(new Date(2018, 0, 1), new Date()), category: "3", value: getRandomInt(1000) },
-  { id: 12, date: randomDate(new Date(2018, 0, 1), new Date()), category: "3", value: getRandomInt(1000) },
-  { id: 13, date: randomDate(new Date(2018, 0, 1), new Date()), category: "3", value: getRandomInt(1000) },
-  { id: 14, date: randomDate(new Date(2018, 0, 1), new Date()), category: "3", value: getRandomInt(1000) },
+  { id: 1, date: randomDate(new Date(2020, 0, 1), new Date()), category: "1", value: getRandomInt(1000) },
+  { id: 2, date: randomDate(new Date(2020, 0, 1), new Date()), category: "1", value: getRandomInt(1000) },
+  { id: 4, date: randomDate(new Date(2020, 0, 1), new Date()), category: "1", value: getRandomInt(1000) },
+  { id: 3, date: randomDate(new Date(2020, 0, 1), new Date()), category: "1", value: getRandomInt(1000) },
+  { id: 5, date: randomDate(new Date(2020, 0, 1), new Date()), category: "1", value: getRandomInt(1000) },
+  { id: 6, date: randomDate(new Date(2020, 0, 1), new Date()), category: "1", value: getRandomInt(1000) },
+  { id: 7, date: randomDate(new Date(2020, 0, 1), new Date()), category: "2", value: getRandomInt(1000) },
+  { id: 8, date: randomDate(new Date(2020, 0, 1), new Date()), category: "2", value: getRandomInt(1000) },
+  { id: 9, date: randomDate(new Date(2020, 0, 1), new Date()), category: "2", value: getRandomInt(1000) },
+  { id: 10, date: randomDate(new Date(2020, 0, 1), new Date()), category: "2", value: getRandomInt(1000) },
+  { id: 11, date: randomDate(new Date(2020, 0, 1), new Date()), category: "3", value: getRandomInt(1000) },
+  { id: 12, date: randomDate(new Date(2020, 0, 1), new Date()), category: "3", value: getRandomInt(1000) },
+  { id: 13, date: randomDate(new Date(2020, 0, 1), new Date()), category: "3", value: getRandomInt(1000) },
+  { id: 14, date: randomDate(new Date(2020, 0, 1), new Date()), category: "3", value: getRandomInt(1000) },
 ];
 
-// Show tick markers on X axis && how many
-const showT = false;
-const tickNumber = 6;
+// Show tick markers on X axis && how many + the first tick
+const tickIncrement = "monthYear";
+const tickNumber = 5;
+const interval = "month"
 
 //Use this to change how many lines create grid in graph 
 const gridLineCount = 10
@@ -121,10 +123,26 @@ const height = 600`}</CodeBlock>
         <Chart
           data={data}
           gridLineCount={gridLineCount}
-          showTicks={showT}
           maxTicks={tickNumber}
           height={height}
           width={width}
+        />
+        <hr />
+        <br />
+        <br />
+        <br />
+        <br />
+        <br />
+        <System.H2>Output</System.H2>
+        <hr />
+        <CustomIntervalChart
+          data={data}
+          gridLineCount={gridLineCount}
+          maxTicks={tickNumber}
+          height={height}
+          width={width}
+          tickIncrement={tickIncrement}
+          interval={interval}
         />
         <hr />
         <br />

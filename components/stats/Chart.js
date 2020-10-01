@@ -119,7 +119,6 @@ export default class Chart extends React.Component {
     });
 
     this.setState({
-      //Spread operator is slow!! refactor to use for loop or .reduce
       minY: Math.min(...values),
     });
     return Math.min(...values);
@@ -139,7 +138,6 @@ export default class Chart extends React.Component {
   }
 
   getTicks() {
-    const { data } = this.props;
     const { maxTicks } = this.props;
     const { width } = this.props
     const maxX = Date.parse(this.getMaxX());
@@ -149,20 +147,19 @@ export default class Chart extends React.Component {
     let scaleX = displayWidth / rangeX;
     let bufferX = (width - displayWidth) / 2;
     const allTicks = [];
-    const dates = data.map((z) => {
+    let dateIncrement = Math.ceil(rangeX / maxTicks);
+    let dateCounter = minX
+    allTicks.push({ date: new Date(dateCounter), x: Math.floor(scaleX + bufferX)});
+    for (let i = 0; i < maxTicks; i++) {
       let t = {
         date: "",
         x: "",
-      };
-      t.date = z.date;
-      t.x = Math.floor((Date.parse(z.date) - minX) * scaleX + bufferX);
-      return t;
-    });
-    dates.sort(this.sortDates("x"));
-    const delta = Math.ceil(dates.length / maxTicks);
-    for (let i = 0; i < dates.length; i = i + delta) {
-      allTicks.push(dates[i]);
-    }
+      }
+      dateCounter += dateIncrement;
+      t.date = new Date(dateCounter);
+      t.x = Math.floor((dateCounter - minX) * scaleX + bufferX);
+      allTicks.push(t);
+    } 
     this.setState((prevState) => ({
       ticks: [...prevState.ticks, allTicks],
     }));
@@ -303,12 +300,17 @@ export default class Chart extends React.Component {
             )
           })}
           </g>
-          {  showTicks ?
-            <g id="tickContainer">
+          <g id="tickContainer">         
             {this.state.ticks.flat().map((tick, index) => {
+              const { tickIncrement } = this.props
               const tDate = new Date(tick.date);
               const month = this.monthNames[tDate.getMonth()];
+              const hours = tDate.getHours();
+              const minutes = tDate.getMinutes();
+              const seconds = tDate.getSeconds();
               const year = tDate.getUTCFullYear();
+              switch(tickIncrement) {
+              case "monthYear":
               return (
                 <g>
                 <line css={STYLES_AXIS_LINE} x1={tick.x} y1="90%" x2={tick.x} y2="92%" />
@@ -317,17 +319,37 @@ export default class Chart extends React.Component {
                 </text>
               </g>
               )
-            })}
-            </g> : 
-          (<g id="labels">
-            <text css={STYLES_CHART_TEXT} x="8%" y="95%">
+              case "year":
+                return (
+                  <g>
+                  <line css={STYLES_AXIS_LINE} x1={tick.x} y1="90%" x2={tick.x} y2="92%" />
+                  <text css={STYLES_CHART_TEXT} textAnchor="middle" x={tick.x} y="95%">
+                    {`${year}`}
+                  </text>
+                </g>
+                )
+              case "hour":
+                return (
+                  <g>
+                  <line css={STYLES_AXIS_LINE} x1={tick.x} y1="90%" x2={tick.x} y2="92%" />
+                  <text css={STYLES_CHART_TEXT} textAnchor="middle" x={tick.x} y="95%">
+                    {`${hours}:${minutes}:${seconds}`}
+                  </text>
+                </g>
+                )
+              default:
+                return (
+                <g id="labels">
+                <text css={STYLES_CHART_TEXT} x="8%" y="95%">
                 {Object.keys(data[0])[1]} 
               </text>
               <text css={STYLES_CHART_TEXT_Y} x="5%" y="82%">
                 {Object.keys(data[0])[3]}
               </text>
-          </g>)
-          }
+                </g>)
+              }
+            })}
+          </g>
           <g id="circles">
           {this.state.organizedData.flat(2).map((g, index) => {
             return (

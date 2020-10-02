@@ -20,26 +20,26 @@ const randomDate = (start, end) => {
 }
 
 let data = [
-  { id: 1, date: randomDate(new Date(2020, 0, 1), new Date()), category: "1", value: getRandomInt(1000) },
-  { id: 2, date: randomDate(new Date(2020, 0, 1), new Date()), category: "1", value: getRandomInt(1000) },
-  { id: 4, date: randomDate(new Date(2020, 0, 1), new Date()), category: "1", value: getRandomInt(1000) },
-  { id: 3, date: randomDate(new Date(2020, 0, 1), new Date()), category: "1", value: getRandomInt(1000) },
-  { id: 5, date: randomDate(new Date(2020, 0, 1), new Date()), category: "1", value: getRandomInt(1000) },
-  { id: 6, date: randomDate(new Date(2020, 0, 1), new Date()), category: "1", value: getRandomInt(1000) },
+  { id: 1, date: randomDate(new Date(2018, 0, 1), new Date()), category: "1", value: getRandomInt(1000) },
+  { id: 2, date: randomDate(new Date(2018, 0, 1), new Date()), category: "1", value: getRandomInt(1000) },
+  { id: 4, date: randomDate(new Date(2019, 0, 1), new Date()), category: "1", value: getRandomInt(1000) },
+  { id: 3, date: randomDate(new Date(2019, 0, 1), new Date()), category: "1", value: getRandomInt(1000) },
+  { id: 5, date: randomDate(new Date(2019, 0, 1), new Date()), category: "1", value: getRandomInt(1000) },
+  { id: 6, date: randomDate(new Date(2019, 0, 1), new Date()), category: "1", value: getRandomInt(1000) },
   { id: 7, date: randomDate(new Date(2020, 0, 1), new Date()), category: "2", value: getRandomInt(1000) },
   { id: 8, date: randomDate(new Date(2020, 0, 1), new Date()), category: "2", value: getRandomInt(1000) },
-  { id: 9, date: randomDate(new Date(2020, 0, 1), new Date()), category: "2", value: getRandomInt(1000) },
-  { id: 10, date: randomDate(new Date(2020, 0, 1), new Date()), category: "2", value: getRandomInt(1000) },
-  { id: 11, date: randomDate(new Date(2020, 0, 1), new Date()), category: "3", value: getRandomInt(1000) },
-  { id: 12, date: randomDate(new Date(2020, 0, 1), new Date()), category: "3", value: getRandomInt(1000) },
-  { id: 13, date: randomDate(new Date(2020, 0, 1), new Date()), category: "3", value: getRandomInt(1000) },
-  { id: 14, date: randomDate(new Date(2020, 0, 1), new Date()), category: "3", value: getRandomInt(1000) },
+  { id: 9, date: randomDate(new Date(2020, 5, 1), new Date()), category: "2", value: getRandomInt(1000) },
+  { id: 10, date: randomDate(new Date(2020, 6, 1), new Date()), category: "2", value: getRandomInt(1000) },
+  { id: 11, date: randomDate(new Date(2020, 9, 1), new Date()), category: "3", value: getRandomInt(1000) },
+  { id: 12, date: randomDate(new Date(2020, 9, 1), new Date()), category: "3", value: getRandomInt(1000) },
+  { id: 13, date: randomDate(new Date(2020, 9, 1), new Date()), category: "3", value: getRandomInt(1000) },
+  { id: 14, date: randomDate(new Date(2020, 10, 1), new Date()), category: "3", value: getRandomInt(1000) },
 ];
 
 // Show tick markers on X axis && how many + the first tick
 const tickIncrement = "monthYear";
 const tickNumber = 5;
-const interval = "month"
+const interval = "annual"
 
 //Use this to change how many lines create grid in graph 
 const gridLineCount = 10

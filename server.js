@@ -22,6 +22,9 @@ const handler = app.getRequestHandler();
 
 app.prepare().then(async () => {
   const server = express();
+  const timeout = 10 * 60_000
+  server.headersTimeout = timeout
+  server.timeout = timeout
 
   server.use(cors());
 
